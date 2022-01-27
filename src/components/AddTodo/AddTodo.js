@@ -18,7 +18,7 @@ setTodo(
 [...todo, {
     id:  uuidv4(),
     title: value,
-    status: true
+    status: false
 }]
 
 )
