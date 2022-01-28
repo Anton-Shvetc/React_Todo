@@ -1,9 +1,10 @@
 import react from "react";
-import { useState } from "react/cjs/react.development";
+import { useState, useEffect } from "react/cjs/react.development";
 import {Row, Col, Button} from 'react-bootstrap';
 import s from './TodoList.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTrash, faEdit, faLock , faLockOpen} from '@fortawesome/free-solid-svg-icons'
+import {ButtonGroup} from 'react-bootstrap'
 
 
 
@@ -16,8 +17,24 @@ function TodoList({todo, setTodo}) {
   
     const [edit, setEdit] = useState(null)
     const [value, setValue] = useState('');
+    const [filtered, setFiltered] = useState(todo)
+
+    useEffect( () => {
+        setFiltered(todo)
+    }, [todo]) // Перерендер только после изменения todo
   
 
+
+function todoFilter(status) {
+    if (status === 'all') {
+        setFiltered(todo)
+    }
+    else {
+        let newTodo = [...todo].filter(item => item.status === status)
+        setFiltered(newTodo)
+    }
+
+}
 
 function editTodo(id, title) {
 
@@ -65,9 +82,21 @@ item.status = !item.status
 
     return (
 
-        <div className="list">
+        <div >
+
+
+            <Row>
+                <Col className={s.filter}>
+                <ButtonGroup aria-label="Basic example" className={s.btns}>
+  <Button variant="secondary" onClick={() => todoFilter('all')}>Все задачи</Button>
+  <Button variant="secondary" onClick={() => todoFilter(false)}>Открытые задачи</Button>
+  <Button variant="secondary" onClick={() => todoFilter(true)}>Закрытые задачи</Button>
+</ButtonGroup>
+                </Col>
+            </Row>
+       
             {
-           todo.map(  item => (
+           filtered.map(  item => (
          <div key= {item.id} className ={ s.listItems}> 
             {
                 edit == item.id ? 

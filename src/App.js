@@ -11,7 +11,11 @@ function App() {
 
   // Хранит в себе информацию о списке задач
   // setTodo - функция, которая меняет нашу задачу
-  const [todo, setTodo] = useState( [ ])
+  const [todo, setTodo] = useState( [  
+
+
+
+  ])
 
   return (
    <Container>

@@ -19,3 +19,10 @@
     color: grey;
     text-decoration: line-through;
 }
+.filter {
+    display: flex;
+    justify-content: center;
+}
+.btns {
+    margin-top: 20px;
+}

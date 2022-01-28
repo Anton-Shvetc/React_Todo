@@ -12,17 +12,20 @@ const [value, setValue] = useState('')
 console.log(value)
 
 function saveTodo() {
+    if(value) {
+        setTodo(
 
-setTodo(
+            [...todo, {
+                id:  uuidv4(),
+                title: value,
+                status: false
+            }]
+            
+            )
+            setValue('')
 
-[...todo, {
-    id:  uuidv4(),
-    title: value,
-    status: false
-}]
+    }
 
-)
-setValue('')
 
 }
 
